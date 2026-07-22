@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Onboarding Form — Website Project</title>
+<style>
+  :root{--ink:#1f2937;--muted:#6b7280;--line:#e5e7eb;--accent:#1f3864;--accent-soft:#eef2f9;--bg:#f7f8fa;--card:#ffffff;--ok:#2e7d32;}
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;color:var(--ink);padding:32px 16px 80px;}
+  .wrap{max-width:720px;margin:0 auto;}
+  .header{background:var(--accent);color:#fff;border-radius:12px 12px 0 0;padding:28px 28px 24px;}
+  .header h1{margin:0 0 6px;font-size:22px;font-weight:700;}
+  .header p{margin:0;font-size:14px;opacity:.85;line-height:1.5;}
+  .card{background:var(--card);border:1px solid var(--line);border-top:none;padding:0 28px;}
+  .section{padding:24px 0;border-bottom:1px solid var(--line);}
+  .section:last-of-type{border-bottom:none;}
+  .section-title{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;color:var(--accent);margin:0 0 4px;}
+  .section-num{background:var(--accent-soft);color:var(--accent);width:24px;height:24px;border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;}
+  .section-desc{font-size:13px;color:var(--muted);margin:0 0 16px 34px;}
+  .field{margin:14px 0 14px 34px;}
+  label{display:block;font-size:13.5px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+  .req{color:#c0392b;font-weight:700;}
+  input[type=text],input[type=tel],input[type=email],textarea,select{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:14px;font-family:inherit;background:#fcfcfd;color:var(--ink);}
+  input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent);background:#fff;}
+  textarea{resize:vertical;min-height:70px;}
+  .radio-group,.check-group{display:flex;flex-wrap:wrap;gap:8px;}
+  .radio-group label,.check-group label{font-weight:400;font-size:13.5px;display:flex;align-items:center;gap:6px;background:#fcfcfd;border:1px solid var(--line);padding:8px 12px;border-radius:8px;cursor:pointer;margin:0;}
+  .radio-group input,.check-group input{margin:0;width:auto;}
+  .hint{font-size:12px;color:var(--muted);margin-top:4px;}
+  .file-note{font-size:12.5px;color:var(--muted);background:var(--accent-soft);padding:8px 10px;border-radius:6px;margin-top:4px;}
+  .product-table-wrap{overflow-x:auto;margin-left:34px;}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:12.5px;}
+  th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;}
+  th{background:var(--accent-soft);color:var(--accent);font-weight:700;}
+  td input{border:none;padding:4px;font-size:12.5px;background:transparent;width:100%;}
+  .footer{background:var(--card);border:1px solid var(--line);border-top:none;border-radius:0 0 12px 12px;padding:24px 28px;text-align:center;}
+  .submit-btn{background:var(--accent);color:#fff;border:none;padding:13px 32px;border-radius:8px;font-size:15px;font-weight:700;cursor:pointer;transition:opacity .2s;}
+  .submit-btn:hover{opacity:.88;}
+  .submit-btn:disabled{opacity:.55;cursor:not-allowed;}
+  .footer .hint{margin-top:10px;}
+  .status-msg{display:none;margin-top:14px;padding:12px 16px;background:#eaf6ea;border:1px solid var(--ok);color:var(--ok);border-radius:8px;font-size:13.5px;}
+  .error-msg{display:none;margin-top:14px;padding:12px 16px;background:#fef2f2;border:1px solid #ef4444;color:#b91c1c;border-radius:8px;font-size:13.5px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="header">
+    <h1>Client Onboarding Form</h1>
+    <p>Website project ke liye jo details chahiye, wo yahan bhar dijiye. Files (logo, product images, documents) alag se WhatsApp/Email par bhej sakte hain — form me sirf file ka naam likh dijiye.</p>
+  </div>
+
+
+
+  <form class="card" id="onboardForm">
+
+    <!-- 1 -->
+    <div class="section">
+      <p class="section-title"><span class="section-num">1</span> Business &amp; Legal Details</p>
+      <p class="section-desc">Payment gateway KYC aur branding ke liye zaroori.</p>
+      <div class="field"><label>Brand / Business name <span class="req">*</span></label><input type="text" name="brand_name" required></div>
+      <div class="field"><label>Logo file bheja hai?</label><input type="text" name="logo_status"></div>
+      <div class="field"><label>Brand colors</label><input type="text" name="brand_colors" placeholder="e.g. Navy Blue, Gold"></div>
+      <div class="field"><label>GST Number</label><input type="text" name="gst"></div>
+      <div class="field"><label>PAN Card number</label><input type="text" name="pan"></div>
+      <div class="field"><label>Business registered address</label><textarea name="address"></textarea></div>
+      <div class="field"><label>Bank account number</label><input type="text" name="bank_account"></div>
+      <div class="field"><label>Bank IFSC code</label><input type="text" name="ifsc"></div>
+      <div class="field">
+        <label>Business type</label>
+        <div class="radio-group">
+          <label><input type="radio" name="biz_type" value="Proprietorship">Proprietorship</label>
+          <label><input type="radio" name="biz_type" value="Pvt Ltd">Pvt Ltd</label>
+          <label><input type="radio" name="biz_type" value="Partnership">Partnership</label>
+          <label><input type="radio" name="biz_type" value="Other">Other</label>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="section">
+      <p class="section-title"><span class="section-num">2</span> Domain &amp; Hosting</p>
+      <div class="field"><label>Domain name <span class="req">*</span></label><input type="text" name="domain" placeholder="e.g. yourbrand.in" required></div>
+      <div class="field">
+        <label>Domain already purchased?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="domain_bought" value="Yes">Yes</label>
+          <label><input type="radio" name="domain_bought" value="No">No</label>
+        </div>
+      </div>
+      <div class="field"><label>Registrar</label><input type="text" name="registrar"></div>
+      <div class="field"><label>Support/contact email for site</label><input type="email" name="support_email"></div>
+    </div>
+
+    <!-- 3 -->
+    <div class="section">
+      <p class="section-title"><span class="section-num">3</span> Product Data</p>
+      <p class="section-desc">Kam se kam 5 products yahan bhar dein, baaki Excel me bhej sakte hain.</p>
+      <div class="product-table-wrap">
+        <table id="productTable">
+          <thead>
+            <tr><th>Product Name</th><th>Category</th><th>Regular Price</th><th>Sale Price</th><th>Sizes/Colors</th><th>Stock Qty</th></tr>
+          </thead>
+          <tbody id="productTableBody"></tbody>
+        </table>
+      </div>
+      <p class="file-note" style="margin-left:34px;">30 rows di gayi hain. Zyada products ho to Excel sheet alag se bhej dein.</p>
+    </div>
+
+    <!-- 4 -->
+    <div class="section">
+      <p class="section-title"><span class="section-num">4</span> Payment &amp; Shipping</p>
+      <div class="field">
+        <label>Preferred payment gateway</label>
+        <div class="radio-group">
+          <label><input type="radio" name="gateway" value="Razorpay">Razorpay</label>
+          <label><input type="radio" name="gateway" value="PayU">PayU</label>
+          <label><input type="radio" name="gateway" value="Cashfree">Cashfree</label>
+          <label><input type="radio" name="gateway" value="No preference">No preference</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Shipping partner</label>
+        <div class="radio-group">
+          <label><input type="radio" name="shipping" value="Shiprocket">Shiprocket</label>
+          <label><input type="radio" name="shipping" value="Delhivery">Delhivery</label>
+          <label><input type="radio" name="shipping" value="Own logistics">Own logistics</label>
+          <label><input type="radio" name="shipping" value="Not decided">Not decided</label>
+        </div>
+      </div>
+      <div class="field"><label>Free shipping or paid?</label><input type="text" name="shipping_charges"></div>
+      <div class="field"><label>Estimated delivery time</label><input type="text" name="delivery_time" placeholder="e.g. 3-7 business days"></div>
+      <div class="field"><label>Return/replacement window</label><input type="text" name="return_window" placeholder="e.g. 7 days"></div>
+      <div class="field"><label>Support phone number</label><input type="tel" name="support_phone"></div>
+      <div class="field"><label>WhatsApp number for order updates</label><input type="tel" name="whatsapp_number"></div>
+    </div>
+
+    <!-- 5 -->
+    <div class="section">
+      <p class="section-title"><span class="section-num">5</span> Content &amp; Marketing</p>
+      <div class="field"><label>About Us / brand story</label><textarea name="about_us"></textarea></div>
+      <div class="field"><label>Customer testimonials</label><textarea name="testimonials" placeholder="e.g. Yashwant, Jalgaon — 'Bahut acchi quality hai'"></textarea></div>
+      <div class="field"><label>Instagram handle</label><input type="text" name="instagram"></div>
+      <div class="field"><label>Facebook page link</label><input type="text" name="facebook"></div>
+      <div class="field"><label>Any ongoing offers to highlight</label><input type="text" name="offers"></div>
+    </div>
+
+    <!-- 6 -->
+    <div class="section">
+      <p class="section-title"><span class="section-num">6</span> Admin &amp; Communication</p>
+      <div class="field"><label>Number of admin/staff logins needed</label><input type="text" name="staff_logins"></div>
+      <div class="field">
+        <label>Order updates needed via</label>
+        <div class="check-group">
+          <label><input type="checkbox" name="updates[]" value="SMS">SMS</label>
+          <label><input type="checkbox" name="updates[]" value="Email">Email</label>
+          <label><input type="checkbox" name="updates[]" value="WhatsApp">WhatsApp</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Login type preferred</label>
+        <div class="radio-group">
+          <label><input type="radio" name="login_type" value="OTP">OTP</label>
+          <label><input type="radio" name="login_type" value="Email-Password">Email-Password</label>
+          <label><input type="radio" name="login_type" value="Both">Both</label>
+        </div>
+      </div>
+      <div class="field">
+        <label>Sales/analytics dashboard needed?</label>
+        <div class="radio-group">
+          <label><input type="radio" name="analytics" value="Yes">Yes</label>
+          <label><input type="radio" name="analytics" value="No">No</label>
+        </div>
+      </div>
+    </div>
+
+  </form>
+
+  <div class="footer">
+    <button type="button" id="submitBtn" class="submit-btn">Submit Details</button>
+    <p class="hint">Submit hone ke baad confirmation message aayega.</p>
+    <div class="status-msg" id="statusMsg">✅ Details successfully submit ho gayi! Aapko jald contact karenge.</div>
+    <div class="error-msg" id="errorMsg">❌ Submission fail hui. Please dobara try karein ya WhatsApp par bhejein.</div>
+  </div>
+
+</div>
+
+<script>
+// Web3Forms — access key already set in submit handler
+
+(function () {
+
+  // Generate 30 Product Rows
+  var tbody = document.getElementById("productTableBody");
+  var fields = ["name","cat","reg","sale","var","stock"];
+  var rows = "";
+  for (var i = 1; i <= 30; i++) {
+    rows += "<tr>";
+    fields.forEach(function(f){
+      rows += '<td><input type="text" name="product_' + i + '_' + f + '"></td>';
+    });
+    rows += "</tr>";
+  }
+  tbody.innerHTML = rows;
+
+  // Submit Handler
+  document.getElementById("submitBtn").addEventListener("click", function () {
+
+    var form = document.getElementById("onboardForm");
+    var btn  = this;
+
+    // Basic validation
+    if (!form.brand_name.value.trim()) {
+      alert("Brand Name zaroori hai.");
+      form.brand_name.focus();
+      return;
+    }
+    if (!form.domain.value.trim()) {
+      alert("Domain Name zaroori hai.");
+      form.domain.focus();
+      return;
+    }
+
+    // ── Collect raw values ──
+    var raw = {};
+    var elements = form.elements;
+    for (var i = 0; i < elements.length; i++) {
+      var el = elements[i];
+      if (!el.name) continue;
+      if ((el.type === "radio" || el.type === "checkbox") && !el.checked) continue;
+      raw[el.name] = raw[el.name] ? raw[el.name] + ", " + el.value : el.value;
+    }
+
+    // ── Collect filled products only ──
+    var productLines = [];
+    for (var p = 1; p <= 30; p++) {
+      var pName = raw["product_" + p + "_name"];
+      if (pName && pName.trim()) {
+        productLines.push(
+          p + ". " + pName +
+          " | Category: " + (raw["product_" + p + "_cat"]  || "-") +
+          " | MRP: "      + (raw["product_" + p + "_reg"]  || "-") +
+          " | Sale: "     + (raw["product_" + p + "_sale"] || "-") +
+          " | Variants: " + (raw["product_" + p + "_var"]  || "-") +
+          " | Stock: "    + (raw["product_" + p + "_stock"]|| "-")
+        );
+      }
+    }
+
+    // ── Structured payload — Formspree shows each key as a table row in email ──
+    var data = {
+      "=== 1. BUSINESS & LEGAL ===":  "---",
+      "Brand Name":          raw.brand_name        || "",
+      "Logo Status":         raw.logo_status        || "",
+      "Brand Colors":        raw.brand_colors       || "",
+      "GST Number":          raw.gst                || "",
+      "PAN Number":          raw.pan                || "",
+      "Address":             raw.address            || "",
+      "Bank Account":        raw.bank_account       || "",
+      "IFSC Code":           raw.ifsc               || "",
+      "Business Type":       raw.biz_type           || "",
+
+      "=== 2. DOMAIN & HOSTING ===":  "---",
+      "Domain Name":         raw.domain             || "",
+      "Domain Purchased":    raw.domain_bought      || "",
+      "Registrar":           raw.registrar          || "",
+      "Support Email":       raw.support_email      || "",
+
+      "=== 3. PRODUCTS ===":          "---",
+      "Product List": productLines.length ? productLines.join("\n") : "(koi product nahi bhara)",
+
+      "=== 4. PAYMENT & SHIPPING ===":"---",
+      "Payment Gateway":     raw.gateway            || "",
+      "Shipping Partner":    raw.shipping           || "",
+      "Shipping Charges":    raw.shipping_charges   || "",
+      "Delivery Time":       raw.delivery_time      || "",
+      "Return Window":       raw.return_window      || "",
+      "Support Phone":       raw.support_phone      || "",
+      "WhatsApp Number":     raw.whatsapp_number    || "",
+
+      "=== 5. CONTENT & MARKETING ===":"---",
+      "About Us":            raw.about_us           || "",
+      "Testimonials":        raw.testimonials       || "",
+      "Instagram":           raw.instagram          || "",
+      "Facebook":            raw.facebook           || "",
+      "Offers":              raw.offers             || "",
+
+      "=== 6. ADMIN & COMMUNICATION ===":"---",
+      "Staff Logins":        raw.staff_logins       || "",
+      "Order Updates Via":   raw["updates[]"]       || "",
+      "Login Type":          raw.login_type         || "",
+      "Analytics Dashboard": raw.analytics          || ""
+    };
+
+    btn.disabled = true;
+    btn.innerHTML = "Submitting...";
+    document.getElementById("statusMsg").style.display = "none";
+    document.getElementById("errorMsg").style.display  = "none";
+
+    // ── Build WhatsApp message ──
+    var msg = "";
+    msg += "🧾 *CLIENT ONBOARDING FORM*\n";
+    msg += "━━━━━━━━━━━━━━━━━━━━\n\n";
+
+    msg += "🏢 *1. BUSINESS & LEGAL*\n";
+    msg += "Brand Name: " + (raw.brand_name || "-") + "\n";
+    msg += "Logo Status: " + (raw.logo_status || "-") + "\n";
+    msg += "Brand Colors: " + (raw.brand_colors || "-") + "\n";
+    msg += "GST: " + (raw.gst || "-") + "\n";
+    msg += "PAN: " + (raw.pan || "-") + "\n";
+    msg += "Address: " + (raw.address || "-") + "\n";
+    msg += "Bank Account: " + (raw.bank_account || "-") + "\n";
+    msg += "IFSC: " + (raw.ifsc || "-") + "\n";
+    msg += "Business Type: " + (raw.biz_type || "-") + "\n\n";
+
+    msg += "🌐 *2. DOMAIN & HOSTING*\n";
+    msg += "Domain: " + (raw.domain || "-") + "\n";
+    msg += "Domain Purchased: " + (raw.domain_bought || "-") + "\n";
+    msg += "Registrar: " + (raw.registrar || "-") + "\n";
+    msg += "Support Email: " + (raw.support_email || "-") + "\n\n";
+
+    msg += "📦 *3. PRODUCTS*\n";
+    if (productLines.length) {
+      productLines.forEach(function(p){ msg += p + "\n"; });
+    } else {
+      msg += "(koi product nahi bhara)\n";
+    }
+    msg += "\n";
+
+    msg += "💳 *4. PAYMENT & SHIPPING*\n";
+    msg += "Gateway: " + (raw.gateway || "-") + "\n";
+    msg += "Shipping: " + (raw.shipping || "-") + "\n";
+    msg += "Charges: " + (raw.shipping_charges || "-") + "\n";
+    msg += "Delivery Time: " + (raw.delivery_time || "-") + "\n";
+    msg += "Return Window: " + (raw.return_window || "-") + "\n";
+    msg += "Support Phone: " + (raw.support_phone || "-") + "\n";
+    msg += "WhatsApp: " + (raw.whatsapp_number || "-") + "\n\n";
+
+    msg += "📣 *5. CONTENT & MARKETING*\n";
+    msg += "About Us: " + (raw.about_us || "-") + "\n";
+    msg += "Testimonials: " + (raw.testimonials || "-") + "\n";
+    msg += "Instagram: " + (raw.instagram || "-") + "\n";
+    msg += "Facebook: " + (raw.facebook || "-") + "\n";
+    msg += "Offers: " + (raw.offers || "-") + "\n\n";
+
+    msg += "⚙️ *6. ADMIN*\n";
+    msg += "Staff Logins: " + (raw.staff_logins || "-") + "\n";
+    msg += "Updates Via: " + (raw["updates[]"] || "-") + "\n";
+    msg += "Login Type: " + (raw.login_type || "-") + "\n";
+    msg += "Analytics: " + (raw.analytics || "-") + "\n";
+
+    var waNumber = "917415257403";
+    var waURL = "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(msg);
+
+    document.getElementById("statusMsg").style.display = "block";
+    form.reset();
+    btn.innerHTML = "Submitted ✓";
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    setTimeout(function(){
+      window.open(waURL, "_blank");
+    }, 800);
+
+  });
+
+})();
+</script>
+</body>
+</html>
